@@ -129,7 +129,9 @@ To safely audit the APIC configuration panel from a local engineering station, b
 oc port-forward cisco-vpn-bridge 8443:8443 -n cisco-vpn
 ```
 
-Open a local web browser and navigate to `https://localhost:8443`. You can now authenticate using the assigned administrative sandbox credentials.
+Open a local web browser and navigate to `https://localhost:8443`. You can now authenticate using the assigned administrative sandbox credentials. You will see the main APIC login screen: 
+
+![APIC login screen](img/01-apic-init.png)
 
 ---
 
@@ -267,7 +269,7 @@ ipam:
 ### Analyzing Sandbox API Limits (REST Error Code 107)
 When executing the compilation script with automated fabric injection commands:
 ```bash
-export PASSWORD=
+export PASSWORD=<<< VPN_PASSWORD >>>      # ==> REPLACE with the admin password provided by the ACI Simulator 6.0. 
 acc-provision -a \
   -c acc-provision-input.yaml \
   -f openshift-vmm-lite-baremetal \
