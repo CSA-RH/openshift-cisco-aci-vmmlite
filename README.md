@@ -288,13 +288,13 @@ To bypass this limitation and establish authenticated WebSocket tunnels, the ope
 
 1. Locate the public certificate file (`user-admin.crt`) generated locally on your file system by the tool execution pass. Open it with a text editor and copy the entire string block.
 2. Log into the APIC console at `https://localhost:8443`.
-3. From the primary menu array, select **Admin ➔ AAA ➔ Security Management ➔ Local Users**.
+3. From the primary menu array, select **Admin ➔ AAA ➔ Users ➔ Users** and then the **Local** tab.
 4. Click on the user profile row designated for **`admin`**.
-5. Within the operational properties panel on the right side of the window, locate the grid labeled **User Certificates**.
-6. Click the **+ (Add)** button:
+5. Within the dropdown on the right side of the window, click on **Edit** and then in **Advanced Settings** and finally on **Add X509 Certificate**.  
+7. Click the **+ (Add)** button:
    * **Name**: `user-admin`
    * **Certificate Data**: Paste the public key block exactly as copied.
-7. Click **Submit**.
+8. Click **Submit**.
 
 ### Production-Grade Hardening Alternative (Dedicated GitOps Accounts)
 In production corporate fabrics, altering the core administrative user is strictly prohibited. Infrastructure teams deploy a dedicated, long-lived automation account using explicit cryptographic signature keys. Instead of generating random credentials, you map the `acc-provision-input.yaml` manifest to a pre-existing 10-year certificate pair via the `sync_login` block:
