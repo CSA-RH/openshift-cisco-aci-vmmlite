@@ -395,6 +395,4 @@ oc get network-attachment-definitions -n cisco-integration-vlan120
 ```
 > **Expected Final Outcome**: `No resources found.`
 
-![No resources](10-no-resources.png)  
-
 This confirms that the automated network lifecycle cleanup is working perfectly and the integration is ready for production use.
