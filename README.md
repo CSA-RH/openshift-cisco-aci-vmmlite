@@ -231,9 +231,7 @@ Create the input configuration layout. Note that the **`kubeapi_vlan`** field is
 ```yaml
 aci_config:
   apic_hosts:
-    - X.X.X.X                     # ==> REPLACE with the IP given by the Cisco sandbox for the admin user. 
-  apic_username: "admin"
-
+    - X.X.X.X                     # ==> REPLACE with the IP given by the Cisco sandbox for the admin user.
 vmm_lite_config:
   aaep_monitoring_enabled: True
   bridge_name: "br-nad"
