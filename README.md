@@ -288,7 +288,7 @@ To bypass this limitation and establish authenticated WebSocket tunnels, the ope
 
 1. Locate the public certificate file (`user-admin.crt`) generated locally on your file system by the tool execution pass. Open it with a text editor and copy the entire string block.
 2. Log into the APIC console at `https://localhost:8443`.
-3. From the primary menu array, select **Admin ➔ AAA ➔ Users ➔ Users** and then the **Local** tab.
+3. From the primary menu array, select **Admin ➔ AAA ➔ Users** and then the **Local** tab.
 4. Click on the user profile row designated for **`admin`**.
 5. Within the dropdown on the right side of the window, click on **Edit** and then in **Advanced Settings** and finally on **Add X509 Certificate**.  
 7. Click the **+ (Add)** button:
