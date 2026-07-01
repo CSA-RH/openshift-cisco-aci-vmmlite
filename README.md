@@ -126,7 +126,7 @@ spec:
 To safely audit the APIC configuration panel from a local engineering station, bridge the cluster proxy pod to your machine using the OpenShift CLI port-forward mechanism:
 
 ```bash
-oc port-forward deployment/cisco-vpn-bridge 8443:8443 -n cisco-vpn
+oc port-forward cisco-vpn-bridge 8443:8443 -n cisco-vpn
 ```
 
 Open a local web browser and navigate to `https://localhost:8443`. You can now authenticate using the assigned administrative sandbox credentials.
