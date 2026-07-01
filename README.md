@@ -239,6 +239,7 @@ vmm_lite_config:
   bridge_name: "br-nad"
   cno_identifier: "cno-id1"
   bridge_nad_config_file: "bridge_cni_config.yaml"
+  apic_username: "admin"
 ```
 
 #### 2. Define the Low-Level Network Engine Template (`bridge_cni_config.yaml`)
