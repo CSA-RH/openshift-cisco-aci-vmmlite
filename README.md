@@ -322,6 +322,8 @@ To bind the cluster monitoring daemons to the virtual hardware interfaces, creat
 
 ![AAEP Physical Profiles](02-apic-aaep.png)
 
+We can create then the Monitoring object, which tells the operator the profiles to observe: 
+
 ```yaml
 apiVersion: aci.attachmentmonitor/v1
 kind: AaepMonitor
