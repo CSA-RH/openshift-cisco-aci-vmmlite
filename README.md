@@ -211,13 +211,13 @@ Verify that the policy states have compiled successfully by executing:
 ```bash
 oc get nncp br-nad-bridge-policy
 ```
-> **Expected Status Outcome**: `SuccessfullyEnacted`
+> **Expected Status Outcome**: `SuccessfullyConfigured`
 
 ---
 
 ## 5. Operator Configuration & Automated Generation
 
-The generation of the VMM-Lite controller manifests is driven by Cisco's specialized deployment utility, **`acc-provision`**. This CLI tool processes a centralized infrastructure parameters file to compile the entire target Kubernetes resource bundle. We need to install the tool: 
+The generation of the VMM-Lite controller manifests is driven by Cisco's specialized deployment utility, **`acc-provision`**. This CLI tool processes a centralized infrastructure parameters file to compile the entire target Kubernetes resource bundle. We need first to install the tool: 
 
 ```bash
 pip install acc-provision
