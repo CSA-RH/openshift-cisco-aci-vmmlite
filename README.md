@@ -318,6 +318,10 @@ Once the finalized deployment manifest is generated, push the structural operato
 oc apply -f aci_deployment_vmm_lite.yaml
 ```
 
+Expect the operator pods are up and running: 
+
+![Cisco VMM Lite operator ](03-openshift-vmm-lite-operator.png)
+
 To bind the cluster monitoring daemons to the virtual hardware interfaces, create the **`AaepMonitor`** object. This ensures the operator tracks the relevant physical advancement profiles (e.g., `Heroes_phys` and `SnV_phys` profiles). For instance, in the simulation environment we have: 
 
 ![AAEP Physical Profiles](02-apic-aaep.png)
@@ -341,9 +345,16 @@ spec:
 #### Phase 1: Fabric Object Initialization & Annotation Mapping
 Log into the APIC console interface, navigate to your active Tenant workspace, select an **Application EPG** (such as `vm-integration-vlan120`), and navigate to the **Static AAEP** folder mapping. Select your targeted physical profile domain (`Heroes_phys`) and bind an initial VLAN ID tag (e.g., `131`).
 
-To trigger the automation sync, annotate the EPG object metadata property:
+![Sample tagging](05-tagging-vlan.png)
+
+To trigger the automation sync, annotate the EPG object metadata property (observe the prefix `cno-id1`. It has been set up in the `acc-provision-input.yaml` file in the key `.vmm_lite_config.cno_identifier`:
+>_NOTE_: Namespace `cisco-integration-vlan120` must be created to see the NAD. 
+
 * **Key**: `cno-id1-namespace`
 * **Value**: `cisco-integration-vlan120`
+
+An example screenshot: 
+![Sample tagging](04-namespace-tagging.png)
 
 #### Phase 2: OpenShift Dynamic Reconciliation Verification
 Execute the following search query within the target namespace to confirm that the CNO operator successfully processed the WebSocket frame and auto-generated the matching Multus configuration:
@@ -357,8 +368,14 @@ To audit the underlying JSON config structure and verify that the VLAN ID has be
 oc get network-attachment-definition -n cisco-integration-vlan120 -o jsonpath='{.items[0].spec.config}' | jq
 ```
 
+As an example
+
+![VLAN 131](06-vlan-id-131.png) 
+
 #### Phase 3: Live Propagation & Modification Tracking
 Return to the APIC interface panel, modify the active **Encap** and **Primary Encap** VLAN parameters, shifting the tag from value **`131`** down to **`120`**, and click **Submit**.
+
+![New VLAN tag](07-new-tag-to-vlan.png) 
 
 Re-execute the OpenShift JSON inspection utility. The CNO operator will automatically update the target object parameters in place without needing a restart or manual intervention:
 ```bash
@@ -366,12 +383,18 @@ oc get network-attachment-definition -n cisco-integration-vlan120 -o jsonpath='{
 ```
 > **Output Result**: `120`
 
+![VLAN 120](08-vlan-id-120.png) 
+
 #### Phase 4: Dynamic Propagation Cleanup Verification
 Delete the Application EPG from the Cisco APIC console tree. Run an administrative query against the OpenShift cluster namespace:
+
+![Delete AAEP](09-delete-aaep.png) 
 
 ```bash
 oc get network-attachment-definitions -n cisco-integration-vlan120
 ```
 > **Expected Final Outcome**: `No resources found.`
+
+![No resources](10-no-resources.png)  
 
 This confirms that the automated network lifecycle cleanup is working perfectly and the integration is ready for production use.
