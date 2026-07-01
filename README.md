@@ -131,7 +131,7 @@ oc port-forward cisco-vpn-bridge 8443:8443 -n cisco-vpn
 
 Open a local web browser and navigate to `https://localhost:8443`. You can now authenticate using the assigned administrative sandbox credentials. You will see the main APIC login screen: 
 
-![APIC login screen](01-apic-init.png)
+![APIC login screen](/img/01-apic-init.png)
 
 ---
 
