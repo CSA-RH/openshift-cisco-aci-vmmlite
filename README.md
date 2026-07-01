@@ -318,7 +318,9 @@ Once the finalized deployment manifest is generated, push the structural operato
 oc apply -f aci_deployment_vmm_lite.yaml
 ```
 
-To bind the cluster monitoring daemons to the virtual hardware interfaces, create the **`AaepMonitor`** object. This ensures the operator tracks the relevant physical advancement profiles (e.g., `Heroes_phys` and `SnV_phys` profiles):
+To bind the cluster monitoring daemons to the virtual hardware interfaces, create the **`AaepMonitor`** object. This ensures the operator tracks the relevant physical advancement profiles (e.g., `Heroes_phys` and `SnV_phys` profiles). For instance, in the simulation environment we have: 
+
+![AAEP Physical Profiles](02-apic-aaep.png)
 
 ```yaml
 apiVersion: aci.attachmentmonitor/v1
