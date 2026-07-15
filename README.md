@@ -268,7 +268,7 @@ ipam:
 ### Analyzing Sandbox API Limits (REST Error Code 107)
 When executing the compilation script with automated fabric injection commands:
 ```bash
-export PASSWORD="<<< VPN_PASSWORD >>>"      # ==> REPLACE <<< VPN_PASSWORD >>> with the admin password provided by the ACI Simulator 6.0. 
+export PASSWORD="<<< APIC_PASSWORD >>>"      # ==> REPLACE <<< APIC_PASSWORD >>> with the admin password provided by the ACI Simulator 6.0. 
 acc-provision -a \
   -c acc-provision-input.yaml \
   -f openshift-vmm-lite-baremetal \
