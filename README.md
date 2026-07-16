@@ -64,9 +64,20 @@ metadata:
   namespace: cisco-vpn
 type: Opaque
 stringData:
-  server: "<<< VPN SERVER >>>"         # ==> REPLACE with the provided by Cisco DevNet Sandbox
-  user: "<<< VPN USER >>>"             # ==> REPLACE with your sandbox VPN username
+  server: "<<< VPN_SERVER >>>"         # ==> REPLACE with the provided by Cisco DevNet Sandbox (email)
+  user: "<<< VPN_USER >>>"             # ==> REPLACE with your sandbox VPN username
   password: "<<< VPN_PASSWORD >>>"     # ==> REPLACE with your sandbox VPN credentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cisco-apic-connection
+  namespace: cisco-vpn
+type: Opaque
+stringData:
+  server: "<<< APIC_SERVER >>>"        # ==> REPLACE with the provided by Cisco DevNet Sandbox (APIC)
+  user: "<<< APIC_USER >>>"            # ==> REPLACE with your sandbox APIC username
+  password: "<<< APIC_PASSWORD >>>"    # ==> REPLACE with your sandbox APIC credentials
 ```
 
 #### 2. Deploy Automated Tunnel Engine
@@ -101,6 +112,11 @@ spec:
         secretKeyRef:
           name: cisco-vpn-connection
           key: password
+    - name: APIC_SERVER
+      valueFrom:
+        secretKeyRef:
+          name: cisco-apic-connection
+          key: server
     command:
       - /bin/sh
       - -c
@@ -111,7 +127,7 @@ spec:
         
         echo "Launching automated Port-Forwarding bridge via socat..."
         # 2. Bind background socat to translate local cluster port 8443 to APIC SSL 443
-        socat TCP6-LISTEN:8443,fork,reuseaddr TCP:10.10.20.14:443 &
+        socat TCP6-LISTEN:8443,fork,reuseaddr TCP:${APIC_SERVER}:443 &
         
         echo "Starting automated Cisco VPN connection..."
         # 3. Initialize openconnect in the foreground to persist the pod runtime lifecycle
